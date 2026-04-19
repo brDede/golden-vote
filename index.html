@@ -235,13 +235,14 @@ h1 {
 <script>
 // ==================== Firebase 配置（已填入你的 URL） ====================
 const firebaseConfig = {
-  apiKey: "AIzaSyC_6kwnzUqJgufnTzrZ4Tt4w6M2y4Z8X9k", // 若无效，需从控制台复制替换
+  apiKey: "AIzaSyA6-SfejDyhR2ZqA46mosrjLi-OHnZmHhY",
   authDomain: "golden-vote-db.firebaseapp.com",
-  databaseURL: "https://golden-vote-db-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  databaseURL: "https://golden-vote-db-default-rtdb.asia-southeast1.firebasedatabase.app/", // ← 这行必须加
   projectId: "golden-vote-db",
-  storageBucket: "golden-vote-db.appspot.com",
+  storageBucket: "golden-vote-db.firebasestorage.app",
   messagingSenderId: "282275390725",
-  appId: "1:282275390725:web:abc123def456"
+  appId: "1:282275390725:web:f662562820675b008b036c",
+  measurementId: "G-91XNPBNPWF"
 };
 try {
   firebase.initializeApp(firebaseConfig);

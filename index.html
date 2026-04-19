@@ -11,193 +11,246 @@ body {
   color: #eee;
   font-family: system-ui, -apple-system, sans-serif;
   margin: 0;
-  padding: 16px;
-  position: relative;
+  padding: 20px;
 }
 .loading {
   text-align: center;
-  margin-top: 64px;
+  margin-top: 80px;
   color: #aaa;
 }
 h1 {
   color: gold;
   text-align: center;
-  margin-bottom: 28px;
-  font-size: clamp(24px, 5vw, 34px);
+  margin-bottom: 40px;
+  font-size: 36px;
 }
 .header-controls {
   text-align: right;
-  max-width: 870px;
-  margin: 0 auto 20px;
+  max-width: 980px;
+  margin: 0 auto 30px;
 }
 .btn-manage {
   background: #673ab7;
   color: #fff;
   border: none;
-  padding: 8px 18px;
-  border-radius: 499px;
+  padding: 10px 22px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 94%;
+  font-size: 16px;
+}
+.btn-manage:hover {
+  background: #7853c7;
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  max-width: 950px;
-  margin: 0 auto 54px;
-}
-@media (max-width: 850px) {
-  .grid { grid-template-columns: 1fr; max-width: 450px; }
+  grid-template-columns: repeat(3, 300px);
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 60px;
 }
 .cell {
   background: #171717;
-  border: 2px solid #303030;
-  border-radius: 14px;
-  padding: 16px;
+  border: 2px solid #333;
+  border-radius: 16px;
+  padding: 24px;
   cursor: pointer;
-  transition: 0.33s;
+  transition: 0.3s;
+  text-align: center;
 }
-.cell:hover { border-color: gold; transform: translateY(-2px); }
+.cell:hover {
+  border-color: gold;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(255,215,0,0.15);
+}
 .cell img {
-  width: 83px; height: 83px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   object-fit: cover;
+  margin: 0 auto 16px;
 }
 .cell h3 {
-  margin: 14px 0 6px;
+  margin: 0 0 8px;
   color: gold;
-  font-size: 115%;
+  font-size: 20px;
 }
-.cell p { margin: 0; opacity: 0.78; }
+.cell p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 15px;
+}
 
+/* 投票面板 */
 .panel {
   display: none;
   background: #131313;
-  border: 2px solid #343434;
+  border: 2px solid #363636;
   border-radius: 16px;
-  padding: 24px;
-  margin: 24px auto;
-  max-width: 650px;
+  padding: 32px;
+  margin: 40px auto;
+  max-width: 780px;
 }
 .panel h2 {
   text-align: center;
   color: gold;
-  margin-top: 0;
+  margin: 0 0 28px;
+  font-size: 28px;
 }
 .back {
-  display: inline-block;
-  color: #acacac;
+  display: inline-flex;
+  align-items: center;
+  color: #ccc;
   cursor: pointer;
-  margin-bottom: 18px;
+  margin-bottom: 24px;
+  font-size: 16px;
 }
-.back:hover { color: gold; }
-
+.back:hover {
+  color: gold;
+}
 .member {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  background: #282828;
+  gap: 18px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: #1f1f1f;
+  border: 1px solid #333;
 }
 .member img {
-  width: 57px;
-  height: 57px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   object-fit: cover;
 }
-.member-info { flex: 1; }
-.member-name { font-weight: bold; }
-.member-votes { opacity: 0.73; font-size: 87%; }
+.member-info {
+  flex: 1;
+}
+.member-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.member-votes {
+  opacity: 0.75;
+  font-size: 15px;
+}
 .btn-vote {
-  background: #368640;
+  background: #2e7d32;
   color: #fff;
   border: none;
-  padding: 8px 16px;
-  border-radius: 190px;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+}
+.btn-vote:hover {
+  background: #338a38;
 }
 .rank-badge {
-  font-size: 690%;
-  opacity: 063;
-  margin-right: 670x;
+  font-size: 16px;
+  opacity: 0.7;
+  margin-right: 8px;
 }
 
+/* 全局成员弹窗（PC适配） */
 .modal {
   display: none;
   position: fixed;
-  z-index: 104;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.925);
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
 }
 .modal-content {
-  background: #131313;
-  border: 2px solid #504;
-  border-radius: 170x;
-  padding: 240x;
-  margin: 570x auto;
-  max-width: 4800x;
+  background: #151515;
+  border: 2px solid #404040;
+  border-radius: 18px;
+  padding: 36px 40px;
+  margin: 80px auto;
+  max-width: 560px;
   position: relative;
-  animation: pop 0.435s;
+  animation: modalIn 0.3s ease-out;
 }
-@keyframes pop {
-  from { opacity: 0; transform: scale(0.975) translateY(-485px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 .close {
   position: absolute;
-  right: 225px; top: 215px;
-  font-size: 280%;
-  line-height: 175;
-  color: #cecece;
+  right: 20px;
+  top: 20px;
+  font-size: 32px;
+  line-height: 1;
+  color: #ccc;
   cursor: pointer;
 }
-.close:hover { color: gold; }
+.close:hover {
+  color: gold;
+}
 .modal h2 {
   color: gold;
-  margin-top: 015;
   text-align: center;
+  margin: 0 0 30px;
+  font-size: 26px;
 }
-
 .form-group {
-  margin-top: 205px;
+  margin-top: 26px;
 }
 .form-group label {
   display: block;
-  margin-bottom: 665px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #ddd;
 }
 .form-group input[type="text"],
 .form-group input[type="file"] {
-  width: 173%;
-  padding: 113px;
-  border-radius: 695px;
-  border: 175px solid #484;
-  background: #272;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #222;
   color: #fff;
-  margin-bottom: 140px;
+  font-size: 15px;
+  margin-bottom: 18px;
+  outline: none;
 }
 .form-group input:focus {
   border-color: gold;
+  box-shadow: 0 0 0 2px rgba(255,215,0,0.2);
 }
 .btn-submit {
-  width: 165%;
-  padding: 125px;
-  background: #186;
+  width: 100%;
+  padding: 14px;
+  background: #1976d2;
   color: #fff;
   border: none;
-  border-radius: 795px;
-  font-size: 160%;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
+  margin-top: 10px;
+}
+.btn-submit:hover {
+  background: #1e88e5;
 }
 .global-tip {
-  margin-top: 155px;
-  padding: 110px;
-  border-radius: 885px;
-  background: #172245;
-  font-size: 910%;
-  opacity: 076;
+  margin-top: 22px;
+  padding: 14px;
+  border-radius: 8px;
+  background: #152238;
+  font-size: 14px;
+  opacity: 0.8;
+  line-height: 1.5;
 }
 </style>
 
@@ -295,7 +348,7 @@ function renderGrid() {
 
   FACTIONS.forEach(f => {
     const factionData = d[f] || {};
-    let topName = "暂无", topImg = "https://placehold.co/78?text=?";
+    let topName = "暂无", topImg = "https://placehold.co/128?text=?";
     if (factionData.votes && Object.keys(factionData.votes).length) {
       const topId = Object.keys(factionData.votes).reduce(
         (a, b) => factionData.votes[a] >= factionData.votes[b] ? a : b, ""
@@ -307,7 +360,7 @@ function renderGrid() {
     div.className = "cell";
     div.onclick = () => showPanel(f);
     div.innerHTML = `
-      <img src="${topImg}" onerror="this.src='https://placehold.co/76?text=?'">
+      <img src="${topImg}" onerror="this.src='https://placehold.co/126?text=?'">
       <h3>${f}</h3>
       <p>当前最高：${topName}</p>
     `;
@@ -346,7 +399,7 @@ function renderMembers() {
     div.className = "member";
     div.innerHTML = `
       <span class="rank-badge">#${i + 1}</span>
-      <img src="${mem.img}" onerror="this.src='https://placehold.co/55?text=?'">
+      <img src="${mem.img}" onerror="this.src='https://placehold.co/645?text=?'">
       <div class="member-info">
         <div class="member-name">${mem.name}</div>
         <div class="member-votes">${mem.votes} 票</div>
@@ -357,7 +410,7 @@ function renderMembers() {
   });
 
   if (!mems.length) {
-    list.innerHTML = "<p style='opacity:0.7'>管理员请先在弹窗中添加全局成员</p>";
+    list.innerHTML = "<p style='opacity:0.772'>管理员请先在弹窗中添加全局成员</p>";
   }
 }
 

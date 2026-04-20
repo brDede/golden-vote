@@ -3,83 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>黄金裔九宫格 · 实时共享版</title>
+<title>黄金裔九宫格</title>
 <style>
 * { box-sizing: border-box; }
+:root {
+  --bg: #121212;
+  --card-bg: #171717;
+  --border: #333;
+  --gold: gold;
+  --text: #eee;
+  --btn-main: #6638b7;
+  --btn-danger: #d32f2f;
+}
 body {
-  background: #121212;
-  color: #eee;
+  background: var(--bg);
+  color: var(--text);
   font-family: system-ui, -apple-system, sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 1rem;
+  position: relative;
+}
+.credit {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  font-size: 0.87rem;
+  opacity: 0.66;
+  pointer-events: none;
+  color: #aaa;
 }
 .loading {
   text-align: center;
-  margin-top: 80px;
-  color: #aaa;
+  margin-top: 4rem;
+  color: #999;
 }
 h1 {
-  color: gold;
+  color: var(--gold);
   text-align: center;
-  margin-bottom: 40px;
-  font-size: 36px;
+  margin-bottom: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
 }
 .header-controls {
   text-align: right;
   max-width: 960px;
-  margin: 0 auto 30px;
+  margin: 1.5rem auto 2rem;
 }
 .btn-manage, .btn-reset {
-  background: #673ab7;
+  background: var(--btn-main);
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  font-size: 16px;
-  margin-left: 12px;
+  font-size: 0.95rem;
+  margin-left: 0.8rem;
 }
+.btn-reset { background: var(--btn-danger); }
 .btn-manage:hover { background: #7853c7; }
-.btn-reset {
-  background: #d32f2f;
-}
-.btn-reset:hover { background: #e53935; }
+.btn-reset:hover { background: #e53a36; }
+
+/* 九宫格网格（手机2列，平板/桌面3列） */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 290px);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 1.25rem;
   justify-content: center;
-  margin-bottom: 60px;
+  margin-bottom: 3rem;
+  max-width: 960px;
+  margin-inline: auto;
 }
 .cell {
-  background: #171717;
-  border: 2px solid #333;
-  border-radius: 16px;
-  padding: 24px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 1rem;
+  padding: 1.5rem;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.278s;
   text-align: center;
+  aspect-ratio: 220/220;
 }
 .cell:hover {
-  border-color: gold;
-  transform: translateY(-4px);
+  border-color: var(--gold);
+  transform: translateY(-0.274rem);
 }
 .cell img {
-  width: 90px;
-  height: 90px;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 16px;
+  margin: 0 auto 1rem;
 }
 .cell h3 {
-  margin: 0 0 8px;
-  color: gold;
-  font-size: 20px;
+  margin: 0 0 0.287rem;
+  color: var(--gold);
+  font-size: 1.237rem;
 }
 .cell p {
   margin: 0;
-  opacity: 0.8;
-  font-size: 15px;
+  opacity: 0.283;
+  font-size: 0.227rem;
+}
+.cell .quote {
+  opacity: 0.824;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 0.7rem;
+  line-height: 1.317;
+  word-break: break-word;
 }
 
 /* 投票面板 */
@@ -149,100 +179,152 @@ h1 {
   margin-right: 8px;
 }
 
+
 /* 弹窗通用 */
-.modal, .modal-reset {
+.modal, .modal-reset, .modal-pwd {
   display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.85);
+  z-index: 9100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.872);
 }
-.modal-content, .modal-reset-content {
+.modal-content, .modal-reset-content, .modal-pwd-content {
   background: #151515;
   border: 2px solid #404040;
-  border-radius: 16px;
-  padding: 36px 40px;
-  margin: 80px auto;
-  max-width: 540px;
+  border-radius: 1rem;
+  padding: 2.3rem 2.5rem;
+  margin: 4rem auto;
+  max-width: min(92%, 540px);
+  max-height: 88vh;
+  overflow-y: auto;
   position: relative;
-  animation: modalIn 0.3s ease-out;
+  animation: modalIn 0.317s ease-out;
 }
 @keyframes modalIn {
-  from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+  from { opacity: 0; transform: scale(0.96) translateY(-1.5rem); }
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 .close {
   position: absolute;
-  right: 20px; top: 20px;
-  font-size: 32px;
+  right: 1.3rem;
+  top: 1.3rem;
+  font-size: 2.1rem;
   line-height: 1;
   color: #ccc;
   cursor: pointer;
 }
-.close:hover { color: gold; }
-.modal h2, .modal-reset h2 {
-  color: gold;
+.close:hover { color: var(--gold); }
+.modal h2, .modal-reset h2, .modal-pwd h2 {
+  color: var(--gold);
   text-align: center;
-  margin: 0 0 30px;
-  font-size: 26px;
+  margin: 0 0 1.7rem;
+  font-size: 1.7rem;
 }
-.form-group { margin-top: 24px; }
+.form-section {
+  margin-top: 1.8rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid #333;
+}
+.form-section h3 {
+  color: #ddd;
+  margin: 0 0 1.2rem;
+  font-size: 1.2rem;
+}
+.form-group { margin-bottom: 1.5rem; }
 .form-group label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 0.6rem;
   font-weight: 500;
   color: #ddd;
 }
+.form-group select,
 .form-group input[type="text"],
 .form-group input[type="password"],
-.form-group input[type="file"] {
+.form-group input[type="file"],
+.form-group textarea {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
   border: 1px solid #444;
   background: #222;
   color: #fff;
-  font-size: 15px;
-  margin-bottom: 18px;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
   outline: none;
+  resize: vertical;
 }
-.form-group input:focus {
-  border-color: gold;
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--gold);
 }
-.btn-submit {
+.preview-img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0.7rem auto;
+  display: block;
+}
+.btn-submit, .btn-update, .btn-check {
   width: 100%;
-  padding: 14px;
+  padding: 0.9rem;
   background: #1976d2;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 0.5rem;
+  font-size: 1.05rem;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 1.2rem;
 }
+.btn-update {
+  background: #ff9800;
+}
+.btn-check {
+  background: #9c27b0;
+}
+.btn-update:hover { background: #faad14; }
+.btn-check:hover { background: #ab47bc; }
 .btn-submit:hover { background: #1e88e5; }
 .global-tip {
-  margin-top: 20px;
-  padding: 14px;
-  border-radius: 8px;
+  margin-top: 1.4rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
   background: #152238;
-  font-size: 14px;
+  font-size: 0.9rem;
   opacity: 0.8;
   line-height: 1.5;
 }
 .btn-cancel {
   width: 100%;
-  padding: 12px;
+  padding: 0.8rem;
   background: #666;
   color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 0.5rem;
+  font-size: 1rem;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 .btn-cancel:hover { background: #777; }
+
+@media (max-width: 768px) {
+  body { padding: 0.8rem; }
+  .grid { grid-template-columns: repeat(auto-fit, minmax(45%, 1fr)); }
+  .cell { padding: 1.2rem; }
+  .cell img { width: 4rem; height: 4rem; }
+  .cell h3 { font-size: 1.1rem; }
+  .cell .quote { font-size: 0.84rem; }
+  .header-controls { text-align: center; }
+  .btn-manage, .btn-reset { margin: 0.4rem; }
+  .modal-content, .modal-reset-content, .modal-pwd-content {
+    padding: 1.8rem;
+    margin: 2rem 1rem;
+  }
+}
 </style>
 
 <!-- Firebase SDK -->
@@ -252,12 +334,13 @@ h1 {
 
 <body>
 
+<div class="credit">嘚嘚制作</div>
 <div id="loading" class="loading">正在连接数据库…</div>
 
 <div id="app" style="display:none">
   <h1>黄金裔阵营九宫格</h1>
   <div class="header-controls">
-    <button class="btn-manage" onclick="showModal()">📁 管理全局成员</button>
+    <button class="btn-manage" onclick="showPwdModal()">📁 管理全局成员</button>
     <button class="btn-reset" onclick="showResetModal()">🔄 重置所有票数</button>
   </div>
   <div class="grid" id="grid"></div>
@@ -267,18 +350,56 @@ h1 {
     <div id="memberList"></div>
   </div>
 
-  <!-- 添加成员弹窗 -->
+  <!-- 密码验证弹窗 -->
+  <div class="modal-pwd" id="modalPwd">
+    <div class="modal-pwd-content">
+      <span class="close" onclick="hidePwdModal()">&times;</span>
+      <h2>🔐 请输入管理密码</h2>
+      <div class="form-group">
+        <label>密码</label>
+        <input type="password" id="adminPwd" placeholder="输入密码后点击验证">
+        <button class="btn-check" onclick="checkPwd()">验证密码</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 添加/修改成员弹窗 -->
   <div class="modal" id="modal">
     <div class="modal-content">
       <span class="close" onclick="hideModal()">&times;</span>
-      <h2>🌍 添加全局成员</h2>
-      <div class="form-group">
-        <label>姓名（唯一）</label>
-        <input type="text" id="globalName" placeholder="例：法厄同">
-        <input type="file" id="globalImg" accept="image/*">
-        <button class="btn-submit" onclick="addGlobalMember()">🚀 提交并同步到九大阵营</button>
+      <h2>🌍 管理全局成员</h2>
+
+      <!-- 添加新成员 -->
+      <div class="form-section">
+        <h3>➕ 添加新成员</h3>
+        <div class="form-group">
+          <label>姓名（唯一）</label>
+          <input type="text" id="globalName" placeholder="例：法厄同">
+          <input type="file" id="globalImg" accept="image/*">
+          <button class="btn-submit" onclick="addGlobalMember()">🚀 提交并同步到九大阵营</button>
+        </div>
+        <div class="global-tip">提交后全员可见，所有访客共用一个榜单。</div>
       </div>
-      <div class="global-tip">提交后全员可见，所有访客共用一个榜单。</div>
+
+      <!-- 修改已有成员 -->
+      <div class="form-section">
+        <h3>✏️ 修改已有成员</h3>
+        <div class="form-group">
+          <label>选择成员</label>
+          <select id="editMemberSelect" onchange="loadEditForm()">
+            <option value="">-- 请选择 --</option>
+          </select>
+        </div>
+        <div class="form-group" id="editForm" style="display:none;">
+          <label>新姓名</label>
+          <input type="text" id="editName" placeholder="新名字">
+          <input type="file" id="editImg" accept="image/*">
+          <label>名言</label>
+          <textarea id="editQuote" rows="3" placeholder="输入名言..."></textarea>
+          <button class="btn-update" onclick="updateMember()">💾 保存修改</button>
+          <div class="preview-img" id="editPreview"></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -326,6 +447,7 @@ const DB_ROOT = 'golden_shared_data_v2';
 const RESET_PASSWORD = 'Aa112211'; // 重置密码，可改
 let currentFaction = '';
 let isConnected = false;
+let isPwdVerified = false;
 
 // ==================== 初始化 ====================
 db.ref('.info/connected').on('value', snap => {
@@ -346,9 +468,10 @@ function renderFromSnapshot(snapshot) {
   window.sharedData = data;
   renderGrid();
   if (currentFaction) renderMembers();
+  populateMemberSelect();
 }
 
-// ==================== 九宫格 ====================
+// ==================== 九宫格（名言显示） ====================
 function renderGrid() {
   const grid = document.getElementById("grid");
   if (!grid) return;
@@ -357,13 +480,17 @@ function renderGrid() {
 
   FACTIONS.forEach(f => {
     const factionData = d[f] || {};
-    let topName = "暂无", topImg = "https://placehold.co/128?text=?";
+    let topName = "暂无", topImg = "https://placehold.co/128?text=?", topQuote = "";
     if (factionData.votes && Object.keys(factionData.votes).length) {
       const topId = Object.keys(factionData.votes).reduce(
         (a, b) => factionData.votes[a] >= factionData.votes[b] ? a : b, ""
       );
       const m = d.globalMembers?.find(g => g.id === topId);
-      if (m) { topName = m.name; topImg = m.img; }
+      if (m) { 
+        topName = m.name; 
+        topImg = m.img; 
+        topQuote = m.quote || "";
+      }
     }
     const div = document.createElement("div");
     div.className = "cell";
@@ -372,6 +499,7 @@ function renderGrid() {
       <img src="${topImg}" onerror="this.src='https://placehold.co/128?text=?'">
       <h3>${f}</h3>
       <p>当前最高：${topName}</p>
+      ${topQuote ? `<div class="quote">“${topQuote}”</div>` : ''}
     `;
     grid.appendChild(div);
   });
@@ -411,6 +539,7 @@ function renderMembers() {
       <img src="${mem.img}" onerror="this.src='https://placehold.co/605?text=?'">
       <div class="member-info">
         <div class="member-name">${mem.name}</div>
+        <div class="member-quote">${mem.quote || '暂无名言'}</div>
         <div class="member-votes">${mem.votes} 票</div>
       </div>
       <button class="btn-vote" onclick="vote('${mem.id}')">投票</button>
@@ -419,7 +548,7 @@ function renderMembers() {
   });
 
   if (!mems.length) {
-    list.innerHTML = "<p style='opacity:0.7'>管理员请先在弹窗中添加全局成员</p>";
+    list.innerHTML = "<p style='opacity:0.7'>管理员请先在弹窗中添加全局成员";
   }
 }
 
@@ -429,13 +558,69 @@ async function vote(memId) {
   await ref.transaction(v => (v || 0) + 1);
 }
 
+// ==================== 密码验证 ====================
+function showPwdModal() {
+  document.getElementById("modalPwd").style.display = "block";
+}
+
+function hidePwdModal() {
+  document.getElementById("modalPwd").style.display = "none";
+  document.getElementById("adminPwd").value = "";
+}
+
+function checkPwd() {
+  const pwd = document.getElementById("adminPwd").value;
+  if (pwd === RESET_PASSWORD) {
+    isPwdVerified = true;
+    hidePwdModal();
+    showModal();
+  } else {
+    alert("密码错误");
+  }
+}
+
 // ==================== 成员管理弹窗 ====================
 function showModal() {
+  if (!isPwdVerified) {
+    showPwdModal();
+    return;
+  }
   document.getElementById("modal").style.display = "block";
+  populateMemberSelect();
 }
 
 function hideModal() {
   document.getElementById("modal").style.display = "none";
+  document.getElementById("editForm").style.display = "none";
+  document.getElementById("globalName").value = "";
+  document.getElementById("globalImg").value = "";
+  document.getElementById("editForm").style.display = "none";
+  document.getElementById("editMemberSelect").value = "";
+  document.getElementById("editName").value = "";
+  document.getElementById("editImg").value = "";
+  document.getElementById("editQuote").value = "";
+  document.getElementById("editPreview").src = "";
+}
+
+function populateMemberSelect() {
+  const select = document.getElementById("editMemberSelect");
+  select.innerHTML = '<option value="">-- 请选择 --</option>';
+  (window.sharedData.globalMembers || []).forEach(m => {
+    const opt = document.createElement("option");
+    opt.value = m.id;
+    opt.textContent = m.name;
+    select.appendChild(opt);
+  });
+}
+
+function loadEditForm() {
+  const id = document.getElementById("editMemberSelect").value;
+  const m = (window.sharedData.globalMembers || []).find(x => x.id === id);
+  if (!m) return;
+  document.getElementById("editForm").style.display = "block";
+  document.getElementById("editName").value = m.name;
+  document.getElementById("editQuote").value = m.quote || "";
+  document.getElementById("editPreview").src = m.img;
 }
 
 async function addGlobalMember() {
@@ -451,7 +636,7 @@ async function addGlobalMember() {
   const img = await readFileAsDataURL(file);
 
   const globalRef = db.ref(`${DB_ROOT}/globalMembers`);
-  const newGlobals = [...(window.sharedData.globalMembers || []), { id, name, img }];
+  const newGlobals = [...(window.sharedData.globalMembers || []), { id, name, img, quote: "" }];
   await globalRef.set(newGlobals);
 
   for (const f of FACTIONS) {
@@ -467,7 +652,40 @@ async function addGlobalMember() {
   alert(`✅ 【${name}】已同步到九大阵营`);
   document.getElementById("globalName").value = "";
   document.getElementById("globalImg").value = "";
-  hideModal();
+  populateMemberSelect();
+}
+
+async function updateMember() {
+  if (!isConnected) return alert("请保持网络连接");
+  const id = document.getElementById("editMemberSelect").value;
+  const newName = document.getElementById("editName").value.trim();
+  const newQuote = document.getElementById("editQuote").value.trim();
+  const file = document.getElementById("editImg").files[0];
+  if (!id || !newName) return alert("请填写完整信息");
+
+  const members = [...(window.sharedData.globalMembers || [])];
+  const idx = members.findIndex(m => m.id === id);
+  if (idx === -1) return alert("成员不存在");
+
+  // 检查名字是否冲突（除自己外）
+  if (members.some((m, i) => i !== idx && m.name === newName)) {
+    return alert("这个名字已被占用");
+  }
+
+  let newImg = members[idx].img;
+  if (file) {
+    newImg = await readFileAsDataURL(file);
+  }
+
+  members[idx] = { ...members[idx], name: newName, img: newImg, quote: newQuote };
+
+  const globalRef = db.ref(`${DB_ROOT}/globalMembers`);
+  await globalRef.set(members);
+
+  alert(`✅ 【${newName}】修改成功`);
+  document.getElementById("editForm").style.display = "none";
+  document.getElementById("editMemberSelect").value = "";
+  populateMemberSelect();
 }
 
 // ==================== 重置票数功能 ====================
@@ -515,8 +733,11 @@ function readFileAsDataURL(file) {
 }
 
 window.onclick = e => {
-  if (e.target.classList.contains('modal')) hideModal();
-  if (e.target.id === 'modalReset') hideResetModal();
+  if (e.target.classList.contains('modal') || e.target.classList.contains('modal-pwd') || e.target.classList.contains('modal-reset')) {
+    hideModal();
+    hidePwdModal();
+    hideResetModal();
+  }
 };
 </script>
 </body>

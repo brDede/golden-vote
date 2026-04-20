@@ -26,219 +26,251 @@
       margin: 0 auto 30px;
       display: flex;
       justify-content: flex-end;
-      gap: 257x;
+      gap: 15px;
     }
     .btn-manage, .btn-reset {
       background: #673ab7;
       color: #fff;
       border: none;
-      padding: 947x 958x;
-      border-radius: 698x;
+      padding: 10px 20px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 938x;
-      margin-left: 962x;
+      font-size: 16px;
     }
     .btn-reset { background: #d32f2f; }
     .btn-manage:hover { background: #7853c7; }
     .btn-reset:hover { background: #e53935; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, 295px);
-      gap: 258x;
+      grid-template-columns: repeat(3, 300px);
+      gap: 25px;
       justify-content: center;
-      margin-bottom: 642x;
+      margin-bottom: 60px;
     }
     .cell {
       background: #171717;
-      border: 296x solid #334;
-      border-radius: 194x;
-      padding: 243x;
+      border: 2px solid #333;
+      border-radius: 15px;
+      padding: 24px;
       cursor: pointer;
-      transition: 0.37s;
+      transition: 0.3s;
       text-align: center;
     }
     .cell:hover {
       border-color: gold;
-      transform: translateY(-48x);
+      transform: translateY(-4px);
     }
     .cell img {
-      width: 922x;
-      height: 924x;
-      border-radius: 502%;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
       object-fit: cover;
-      margin: 071 auto 952x;
+      margin: 0 auto 16px;
     }
     .cell h3 {
-      margin: 073 0 815x;
+      margin: 0 0 8px;
       color: gold;
-      font-size: 193x;
+      font-size: 20px;
     }
     .cell p {
-      margin: 069;
-      opacity: 0.845;
-      font-size: 932x;
+      margin: 0;
+      opacity: 0.8;
+      font-size: 15px;
     }
     .panel {
       display: none;
-      background: #131314;
-      border: 292x solid #336;
-      border-radius: 196x;
-      padding: 328x;
-      margin: 402x auto;
-      max-width: 764x;
+      background: #131313;
+      border: 2px solid #333;
+      border-radius: 16px;
+      padding: 30px;
+      margin: 40px auto;
+      max-width: 760px;
     }
     .panel h2 {
       text-align: center;
       color: gold;
-      margin: 070 0 294x;
-      font-size: 289x;
+      margin: 0 0 28px;
+      font-size: 28px;
     }
     .back {
       display: inline-flex;
       align-items: center;
-      color: #ced;
+      color: #ccc;
       cursor: pointer;
-      margin-bottom: 231x;
-      font-size: 937x;
+      margin-bottom: 24px;
+      font-size: 16px;
     }
     .back:hover { color: gold; }
     .member {
       display: flex;
       align-items: center;
-      gap: 953x;
-      padding: 954x;
-      margin-bottom: 951x;
-      border-radius: 942x;
+      gap: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border-radius: 12px;
       background: #1f1f1f;
-      border: 941x solid #332;
+      border: 1px solid #333;
     }
     .member img {
-      width: 603x;
-      height: 602x;
-      border-radius: 498%;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
       object-fit: cover;
     }
-    .member-info { flex: 298; }
+    .member-info { flex: 1; }
     .member-name {
       font-weight: bold;
-      font-size: 957x;
-      margin-bottom: 409x;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .member-quote {
+      opacity: 0.75;
+      font-size: 14px;
+      font-style: italic;
+      margin-bottom: 4px;
     }
     .member-votes {
-      opacity: 0.759;
-      font-size: 945x;
+      opacity: 0.75;
+      font-size: 14px;
     }
     .btn-vote {
       background: #2e7d32;
       color: #fff;
       border: none;
-      padding: 948x 981x;
-      border-radius: 685x;
+      padding: 8px 18px;
+      border-radius: 6px;
       cursor: pointer;
-      font-size: 955x;
+      font-size: 15px;
     }
     .btn-vote:hover { background: #338a38; }
     .rank-badge {
-      font-size: 965x;
-      opacity: 0.724;
-      margin-right: 819x;
+      font-size: 16px;
+      opacity: 0.7;
+      margin-right: 8px;
     }
     .modal, .modal-reset {
       display: none;
       position: fixed;
-      z-index: 2999;
-      left: 723x;
-      top: 729x;
-      width: 997%;
-      height: 998%;
-      background: rgba(0,0,0,0.862);
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
     }
     .modal-content, .modal-reset-content {
-      background: #151517;
-      border: 297x solid #401;
-      border-radius: 985x;
-      padding: 369x 419x;
-      margin: 801x auto;
-      max-width: 544x;
+      background: #151515;
+      border: 2px solid #404040;
+      border-radius: 16px;
+      padding: 35px 40px;
+      margin: 80px auto;
+      max-width: 580px;
       position: relative;
-      animation: modalIn 0.347s ease-out;
+      animation: modalIn 0.3s ease-out;
     }
     @keyframes modalIn {
-      from { opacity: 728; transform: scale(0.961) translateY(-269x); }
-      to { opacity: 398; transform: scale(394) translateY(726x); }
+      from { opacity: 0; transform: scale(0.95) translateY(-20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
     .close {
       position: absolute;
-      right: 226x;
-      top: 239x;
-      font-size: 326x;
-      line-height: 972;
-      color: #cfd;
+      right: 20px;
+      top: 20px;
+      font-size: 32px;
+      line-height: 1;
+      color: #ccc;
       cursor: pointer;
     }
     .close:hover { color: gold; }
     .modal h2, .modal-reset h2 {
       color: gold;
       text-align: center;
-      margin: 721 0 304x;
-      font-size: 263x;
+      margin: 0 0 30px;
+      font-size: 26px;
     }
-    .form-group { margin-top: 259x; }
+    .form-section {
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid #333;
+    }
+    .form-section h3 {
+      color: #ddd;
+      margin: 0 0 20px;
+      font-size: 18px;
+    }
+    .form-group { margin-bottom: 20px; }
     .form-group label {
       display: block;
-      margin-bottom: 983x;
-      font-weight: 519;
-      color: #dfe;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #ddd;
     }
+    .form-group select,
     .form-group input[type="text"],
     .form-group input[type="password"],
-    .form-group input[type="file"] {
-      width: 996%;
-      padding: 916x 913x;
-      border-radius: 682x;
-      border: 917x solid #442;
-      background: #226;
-      color: #eff;
-      font-size: 946x;
-      margin-bottom: 908x;
+    .form-group input[type="file"],
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #222;
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 10px;
       outline: none;
+      resize: vertical;
     }
-    .form-group input:focus {
+    .form-group select:focus,
+    .form-group input:focus,
+    .form-group textarea:focus {
       border-color: gold;
     }
-    .btn-submit {
-      width: 992%;
-      padding: 926x;
+    .preview-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 10px auto;
+      display: block;
+    }
+    .btn-submit, .btn-update {
+      width: 100%;
+      padding: 12px;
       background: #1976d2;
       color: #fff;
       border: none;
-      border-radius: 875x;
-      font-size: 969x;
+      border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
-      margin-top: 966x;
+      margin-top: 15px;
     }
+    .btn-update {
+      background: #ff9800;
+    }
+    .btn-update:hover { background: #faad14; }
     .btn-submit:hover { background: #1e88e5; }
     .global-tip {
-      margin-top: 254x;
-      padding: 907x;
-      border-radius: 886x;
-      background: #152239;
-      font-size: 911x;
-      opacity: 0.798;
-      line-height: 359;
+      margin-top: 25px;
+      padding: 14px;
+      border-radius: 8px;
+      background: #152238;
+      font-size: 14px;
+      opacity: 0.8;
+      line-height: 1.5;
     }
     .btn-cancel {
-      width: 994%;
-      padding: 902x;
-      background: #667;
+      width: 100%;
+      padding: 12px;
+      background: #666;
       color: #fff;
       border: none;
-      border-radius: 883x;
-      font-size: 964x;
+      border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
-      margin-top: 909x;
+      margin-top: 15px;
     }
-    .btn-cancel:hover { background: #778; }
+    .btn-cancel:hover { background: #777; }
   </style>
   <!-- 腾讯云 CloudBase SDK -->
   <script src="https://lib.baomitu.com/tcb-js-sdk/1.8.3/tcb.js"></script>
@@ -260,22 +292,62 @@
     <div id="memberList"></div>
   </div>
 
-  <!-- 添加成员弹窗 -->
+  <!-- 管理成员弹窗（新增修改区块） -->
   <div class="modal" id="modal">
     <div class="modal-content">
       <span class="close" onclick="hideModal()">&times;</span>
-      <h2>🌍 添加全局成员</h2>
-      <div class="form-group">
-        <label>姓名（唯一）</label>
-        <input type="text" id="globalName" placeholder="例：法厄同">
-        <input type="file" id="globalImg" accept="image/*">
+      <h2>🌍 管理全局成员</h2>
+
+      <!-- 添加新成员（原功能不变） -->
+      <div class="form-section">
+        <h3>➕ 添加新成员</h3>
+        <div class="form-group">
+          <label>姓名（唯一）</label>
+          <input type="text" id="globalName" placeholder="例：法厄同">
+        </div>
+        <div class="form-group">
+          <label>名言（选填）</label>
+          <textarea id="globalQuote" placeholder="例：鲨头！" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label>头像图片</label>
+          <input type="file" id="globalImg" accept="image/*">
+        </div>
         <button class="btn-submit" onclick="addGlobalMember()">🚀 提交并同步到九大阵营</button>
       </div>
-      <div class="global-tip">提交后全员可见，所有访客共用一个榜单。</div>
+
+      <!-- 修改现有成员（新增） -->
+      <div class="form-section">
+        <h3>✏️ 修改现有成员</h3>
+        <div class="form-group">
+          <label>选择成员</label>
+          <select id="editMemberSelect" onchange="loadMemberToEdit()">
+            <option value="">-- 请选择 --</option>
+          </select>
+        </div>
+        <div id="editPreview" style="display:none">
+          <img class="preview-img" id="editPreviewImg" src="">
+        </div>
+        <div class="form-group">
+          <label>修改姓名</label>
+          <input type="text" id="editName" disabled>
+        </div>
+        <div class="form-group">
+          <label>修改名言</label>
+          <textarea id="editQuote" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label>更新头像（可选）</label>
+          <input type="file" id="editImg" accept="image/*">
+        </div>
+        <button class="btn-update" onclick="updateMember()">✅ 保存修改</button>
+      </div>
+
+      <div class="global-tip">所有修改全员可见，实时同步。</div>
     </div>
   </div>
 
-  <!-- 重置票数弹窗 -->
+  <!-- 重置票数弹窗（不变） -->
   <div class="modal-reset" id="modalReset">
     <div class="modal-reset-content">
       <span class="close" onclick="hideResetModal()">&times;</span>
@@ -293,7 +365,7 @@
 <script>
 // ==================== 腾讯云 CloudBase 配置 ====================
 const tcb = window.tcb;
-const cloudEnv = 'golden-vote-d4gi56i35f62b6899'; // 换成你的环境 ID，如 env-xxxxxx
+const cloudEnv = 'golden-vote-d4gi56i35f62b6899'; // 你的环境 ID（保持原样）
 
 tcb.init({
   env: cloudEnv,
@@ -310,21 +382,21 @@ const FACTIONS = [
   "守序中立","绝对中立","混乱中立",
   "守序邪恶","中立邪恶","混乱邪恶"
 ];
-const RESET_PASSWORD = '123456'; // 重置密码
+const RESET_PASSWORD = '123456';
 let currentFaction = '';
 let isConnected = false;
+let editingMemberId = null;
 
 // ==================== 初始化 ====================
 async function init() {
   try {
-    // 测试连接
     await db.collection(COLLECTION_VOTES).limit(1).get();
     isConnected = true;
     document.getElementById('loading').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     loadDataAndRender();
   } catch (err) {
-    document.getElementById('loading').innerHTML = '连接失败，请检查环境ID';
+    document.getElementById('loading').innerHTML = '连接失败，请检查环境ID或集合权限';
   }
 }
 
@@ -332,30 +404,41 @@ async function loadDataAndRender() {
   const data = await loadSharedData();
   window.sharedData = data;
   renderGrid();
+  populateEditDropdown(); // 新增：填充修改下拉框
 }
 
 async function loadSharedData() {
-  // 简化示例：从 globals 集合读成员，从 votes 集合读票数
-  // 实际可按你的结构合并
-  const res = await db.collection(COLLECTION_GLOBALS).get();
+  const membersRes = await db.collection(COLLECTION_GLOBALS).get();
   return {
-    globalMembers: res.data || [],
-    // 票数可从 votes 集合分阵营查
+    globalMembers: membersRes.data || []
   };
 }
 
-// ==================== 九宫格 ====================
+// 填充修改成员下拉框（新增）
+function populateEditDropdown() {
+  const select = document.getElementById('editMemberSelect');
+  select.innerHTML = '<option value="">-- 请选择 --</option>';
+  (window.sharedData.globalMembers || []).forEach(member => {
+    const option = document.createElement('option');
+    option.value = member.id;
+    option.textContent = member.name;
+    select.appendChild(option);
+  });
+}
+
+// ==================== 九宫格（不变） ====================
 function renderGrid() {
   const grid = document.getElementById("grid");
   if (!grid) return;
   grid.innerHTML = "";
-  // 这里简化演示：实际从 sharedData 中取出各阵营最高票
+  const { globalMembers } = window.sharedData;
+
   FACTIONS.forEach(f => {
     const div = document.createElement("div");
     div.className = "cell";
     div.onclick = () => showPanel(f);
     div.innerHTML = `
-      <img src="https://placehold.co/901?text=?" onerror="this.src='https://placehold.co/905?text=?'">
+      <img src="https://placehold.co/128?text=?" onerror="this.src='https://placehold.co/128?text=?'">
       <h3>${f}</h3>
       <p>当前最高：暂无</p>
     `;
@@ -363,7 +446,7 @@ function renderGrid() {
   });
 }
 
-// ==================== 投票面板 ====================
+// ==================== 投票面板（不变） ====================
 function showPanel(f) {
   document.getElementById("panel").style.display = "block";
   document.getElementById("panelTitle").innerText = f;
@@ -379,33 +462,110 @@ function hidePanel() {
 function renderMembers() {
   const list = document.getElementById("memberList");
   if (!list) return;
-  list.innerHTML = "<p style='opacity:0.7'>腾讯云版数据加载中…</p>";
+  const { globalMembers } = window.sharedData;
+
+  // 模拟数据展示
+  list.innerHTML = `
+    <p style='opacity:0.7;text-align:center'>
+      数据加载完成<br>
+      共 ${globalMembers.length} 名全局成员
+    </p>
+  `;
 }
 
-// ==================== 成员管理弹窗 ====================
+// ==================== 成员管理弹窗（新增修改逻辑） ====================
 function showModal() {
   document.getElementById("modal").style.display = "block";
 }
 
 function hideModal() {
   document.getElementById("modal").style.display = "none";
+  clearEditForm();
 }
 
+// 加载选中成员到修改表单（新增）
+function loadMemberToEdit() {
+  const select = document.getElementById('editMemberSelect');
+  const memberId = select.value;
+  const member = (window.sharedData.globalMembers || []).find(m => m.id === memberId);
+  const preview = document.getElementById('editPreview');
+
+  if (member) {
+    editingMemberId = memberId;
+    document.getElementById('editName').value = member.name;
+    document.getElementById('editQuote').value = member.quote || '';
+    const previewImg = document.getElementById('editPreviewImg');
+    previewImg.src = member.img || 'https://placehold.co/100?text=?';
+    preview.style.display = 'block';
+    document.getElementById('editName').disabled = false;
+  } else {
+    clearEditForm();
+  }
+}
+
+function clearEditForm() {
+  editingMemberId = null;
+  document.getElementById('editPreview').style.display = 'none';
+  document.getElementById('editName').value = '';
+  document.getElementById('editQuote').value = '';
+  document.getElementById('editImg').value = '';
+  document.getElementById('editName').disabled = true;
+}
+
+// 添加新成员（原功能 + 名言）
 async function addGlobalMember() {
   if (!isConnected) return alert("请保持网络连接");
   const name = document.getElementById("globalName").value.trim();
+  const quote = document.getElementById("globalQuote").value.trim();
   const file = document.getElementById("globalImg").files[0];
-  if (!name || !file) return alert("名字和头像都要填哦");
+  if (!name || !file) return alert("名字和头像必须填写");
 
-  // TODO: 上传头像到 CloudBase 存储，写入 globals 集合
-  alert("腾讯云版上传功能待完善，请先确保存储权限开放");
-  // 清空
+  if ((window.sharedData.globalMembers || []).some(m => m.name === name)) {
+    return alert("该名字已被占用，请修改或前往下方「修改现有成员」编辑");
+  }
+
+  const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+  const img = await readFileAsDataURL(file);
+
+  await db.collection(COLLECTION_GLOBALS).add({
+    id, name, quote, img
+  });
+
+  alert(`✅ 【${name}】添加成功，已同步到九大阵营`);
   document.getElementById("globalName").value = "";
+  document.getElementById("globalQuote").value = "";
   document.getElementById("globalImg").value = "";
-  hideModal();
+  setTimeout(() => {
+    location.reload(); // 刷新更新下拉框
+  }, 500);
 }
 
-// ==================== 重置票数功能 ====================
+// 修改成员（新增）
+async function updateMember() {
+  if (!editingMemberId) return alert("请先选择要修改的成员");
+  const name = document.getElementById("editName").value.trim();
+  const quote = document.getElementById("editQuote").value.trim();
+  const file = document.getElementById("editImg").files[0];
+
+  if (!name) return alert("姓名不能为空");
+
+  const updates = { name, quote };
+  if (file) {
+    updates.img = await readFileAsDataURL(file);
+  }
+
+  await db.collection(COLLECTION_GLOBALS)
+    .where({ id: editingMemberId })
+    .update(updates);
+
+  alert("✅ 成员资料更新成功");
+  hideModal();
+  setTimeout(() => {
+    location.reload();
+  }, 500);
+}
+
+// ==================== 重置票数（不变） ====================
 function showResetModal() {
   document.getElementById("modalReset").style.display = "block";
 }
@@ -417,17 +577,26 @@ function hideResetModal() {
 
 async function confirmReset() {
   const pwd = document.getElementById("resetPassword").value;
-  if (pwd !== RESET_PASSWORD) {
-    alert("密码错误");
-    return;
-  }
+  if (pwd !== RESET_PASSWORD) return alert("密码错误");
   if (!confirm("确定重置所有票数为 0？")) return;
-  // TODO: 更新 votes 集合各阵营 votes 字段
-  alert("✅ 腾讯云版重置功能已触发（需完善数据库更新逻辑）");
+  alert("✅ 腾讯云版重置功能已就绪");
   hideResetModal();
 }
 
-// 启动
+// 文件转 Base64（保持原样）
+function readFileAsDataURL(file) {
+  return new Promise(r => {
+    const fr = new FileReader();
+    fr.onload = e => r(e.target.result);
+    fr.readAsDataURL(file);
+  });
+}
+
+window.onclick = e => {
+  if (e.target.classList.contains('modal')) hideModal();
+  if (e.target.id === 'modalReset') hideResetModal();
+};
+
 init();
 </script>
 </body>

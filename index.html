@@ -14,6 +14,7 @@
   --text: #eee;
   --btn-main: #6638b7;
   --btn-danger: #d32f2f;
+  --btn-delete: #f44336;
 }
 body {
   background: var(--bg);
@@ -100,8 +101,8 @@ h1 {
 }
 .cell p {
   margin: 0;
-  opacity: 0.283;
-  font-size: 0.227rem;
+  opacity: 0.8;
+  font-size: 0.9rem;
 }
 .cell .quote {
   opacity: 0.824;
@@ -117,79 +118,85 @@ h1 {
   display: none;
   background: #131313;
   border: 2px solid #333;
-  border-radius: 16px;
-  padding: 32px;
-  margin: 40px auto;
-  max-width: 750px;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2.5rem auto;
+  max-width: 48rem;
 }
 .panel h2 {
   text-align: center;
   color: gold;
-  margin: 0 0 28px;
-  font-size: 28px;
+  margin: 0 0 1.75rem;
+  font-size: 1.75rem;
 }
 .back {
   display: inline-flex;
   align-items: center;
   color: #ccc;
   cursor: pointer;
-  margin-bottom: 24px;
-  font-size: 16px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
 }
 .back:hover { color: gold; }
 .member {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
-  border-radius: 12px;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
   background: #1f1f1f;
   border: 1px solid #333;
 }
 .member img {
-  width: 60px;
-  height: 60px;
+  width: 3.75rem;
+  height: 3.75rem;
   border-radius: 50%;
   object-fit: cover;
 }
 .member-info { flex: 1; }
 .member-name {
   font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 4px;
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+}
+.member-quote {
+  opacity: 0.75;
+  font-size: 0.875rem;
+  font-style: italic;
+  margin-bottom: 0.25rem;
+  word-break: break-word;
 }
 .member-votes {
   opacity: 0.75;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 .btn-vote {
   background: #2e7d32;
   color: #fff;
   border: none;
-  padding: 8px 18px;
-  border-radius: 6px;
+  padding: 0.5rem 1.125rem;
+  border-radius: 0.375rem;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 .btn-vote:hover { background: #338a38; }
 .rank-badge {
-  font-size: 16px;
+  font-size: 1rem;
   opacity: 0.7;
-  margin-right: 8px;
+  margin-right: 0.5rem;
 }
-
 
 /* 弹窗通用 */
 .modal, .modal-reset, .modal-pwd {
   display: none;
   position: fixed;
-  z-index: 9100;
+  z-index: 1000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.872);
+  background: rgba(0,0,0,0.85);
 }
 .modal-content, .modal-reset-content, .modal-pwd-content {
   background: #151515;
@@ -201,7 +208,7 @@ h1 {
   max-height: 88vh;
   overflow-y: auto;
   position: relative;
-  animation: modalIn 0.317s ease-out;
+  animation: modalIn 0.3s ease-out;
 }
 @keyframes modalIn {
   from { opacity: 0; transform: scale(0.96) translateY(-1.5rem); }
@@ -236,7 +243,7 @@ h1 {
 .form-group { margin-bottom: 1.5rem; }
 .form-group label {
   display: block;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
   font-weight: 500;
   color: #ddd;
 }
@@ -252,7 +259,7 @@ h1 {
   background: #222;
   color: #fff;
   font-size: 1rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
   outline: none;
   resize: vertical;
 }
@@ -269,26 +276,24 @@ h1 {
   margin: 0.7rem auto;
   display: block;
 }
-.btn-submit, .btn-update, .btn-check {
+.btn-submit, .btn-update, .btn-check, .btn-delete {
   width: 100%;
   padding: 0.9rem;
-  background: #1976d2;
-  color: #fff;
   border: none;
   border-radius: 0.5rem;
   font-size: 1.05rem;
   cursor: pointer;
   margin-top: 1.2rem;
+  color: #fff;
 }
-.btn-update {
-  background: #ff9800;
-}
-.btn-check {
-  background: #9c27b0;
-}
-.btn-update:hover { background: #faad14; }
-.btn-check:hover { background: #ab47bc; }
+.btn-submit { background: #1976d2; }
 .btn-submit:hover { background: #1e88e5; }
+.btn-update { background: #ff9800; }
+.btn-update:hover { background: #faad14; }
+.btn-check { background: #9c27b0; }
+.btn-check:hover { background: #ab47bc; }
+.btn-delete { background: #f44336; }
+.btn-delete:hover { background: #d32f2f; }
 .global-tip {
   margin-top: 1.4rem;
   padding: 1rem;
@@ -363,27 +368,33 @@ h1 {
     </div>
   </div>
 
-  <!-- 添加/修改成员弹窗 -->
+  <!-- 添加/修改/删除成员弹窗 -->
   <div class="modal" id="modal">
     <div class="modal-content">
       <span class="close" onclick="hideModal()">&times;</span>
       <h2>🌍 管理全局成员</h2>
 
-      <!-- 添加新成员 -->
+      <!-- 添加新成员（新增名言字段） -->
       <div class="form-section">
         <h3>➕ 添加新成员</h3>
         <div class="form-group">
           <label>姓名（唯一）</label>
           <input type="text" id="globalName" placeholder="例：法厄同">
-          <input type="file" id="globalImg" accept="image/*">
-          <button class="btn-submit" onclick="addGlobalMember()">🚀 提交并同步到九大阵营</button>
         </div>
-        <div class="global-tip">提交后全员可见，所有访客共用一个榜单。</div>
+        <div class="form-group">
+          <label>名言（选填）</label>
+          <textarea id="globalQuote" rows="2" placeholder="输入成员名言..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>头像图片</label>
+          <input type="file" id="globalImg" accept="image/*">
+        </div>
+        <button class="btn-submit" onclick="addGlobalMember()">🚀 提交并同步到九大阵营</button>
       </div>
 
-      <!-- 修改已有成员 -->
+      <!-- 修改/删除已有成员 -->
       <div class="form-section">
-        <h3>✏️ 修改已有成员</h3>
+        <h3>✏️ 修改/删除成员</h3>
         <div class="form-group">
           <label>选择成员</label>
           <select id="editMemberSelect" onchange="loadEditForm()">
@@ -393,13 +404,19 @@ h1 {
         <div class="form-group" id="editForm" style="display:none;">
           <label>新姓名</label>
           <input type="text" id="editName" placeholder="新名字">
+          <label>修改名言</label>
+          <textarea id="editQuote" rows="2" placeholder="输入名言..."></textarea>
+          <label>更新头像（可选）</label>
           <input type="file" id="editImg" accept="image/*">
-          <label>名言</label>
-          <textarea id="editQuote" rows="3" placeholder="输入名言..."></textarea>
-          <button class="btn-update" onclick="updateMember()">💾 保存修改</button>
           <div class="preview-img" id="editPreview"></div>
+          <div class="btn-group" style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button class="btn-update" onclick="updateMember()" style="flex: 1;">💾 保存修改</button>
+            <button class="btn-delete" onclick="confirmDeleteMember()" style="flex: 1;">🗑️ 删除成员</button>
+          </div>
         </div>
       </div>
+
+      <div class="global-tip">提交后全员可见，所有访客共用一个榜单。</div>
     </div>
   </div>
 
@@ -444,10 +461,11 @@ const FACTIONS = [
   "守序邪恶","中立邪恶","混乱邪恶"
 ];
 const DB_ROOT = 'golden_shared_data_v2';
-const RESET_PASSWORD = 'Aa112211'; // 重置密码，可改
+const RESET_PASSWORD = 'Aa112211';
 let currentFaction = '';
 let isConnected = false;
 let isPwdVerified = false;
+let editingMemberId = null;
 
 // ==================== 初始化 ====================
 db.ref('.info/connected').on('value', snap => {
@@ -536,7 +554,7 @@ function renderMembers() {
     div.className = "member";
     div.innerHTML = `
       <span class="rank-badge">#${i + 1}</span>
-      <img src="${mem.img}" onerror="this.src='https://placehold.co/605?text=?'">
+      <img src="${mem.img}" onerror="this.src='https://placehold.co/60?text=?'">
       <div class="member-info">
         <div class="member-name">${mem.name}</div>
         <div class="member-quote">${mem.quote || '暂无名言'}</div>
@@ -593,13 +611,15 @@ function hideModal() {
   document.getElementById("modal").style.display = "none";
   document.getElementById("editForm").style.display = "none";
   document.getElementById("globalName").value = "";
+  document.getElementById("globalQuote").value = "";
   document.getElementById("globalImg").value = "";
   document.getElementById("editForm").style.display = "none";
   document.getElementById("editMemberSelect").value = "";
   document.getElementById("editName").value = "";
-  document.getElementById("editImg").value = "";
   document.getElementById("editQuote").value = "";
+  document.getElementById("editImg").value = "";
   document.getElementById("editPreview").src = "";
+  editingMemberId = null;
 }
 
 function populateMemberSelect() {
@@ -616,18 +636,28 @@ function populateMemberSelect() {
 function loadEditForm() {
   const id = document.getElementById("editMemberSelect").value;
   const m = (window.sharedData.globalMembers || []).find(x => x.id === id);
-  if (!m) return;
+  if (!m) {
+    document.getElementById("editForm").style.display = "none";
+    editingMemberId = null;
+    return;
+  }
+  editingMemberId = id;
   document.getElementById("editForm").style.display = "block";
   document.getElementById("editName").value = m.name;
   document.getElementById("editQuote").value = m.quote || "";
-  document.getElementById("editPreview").src = m.img;
+  const previewImg = document.getElementById("editPreview");
+  previewImg.src = m.img || 'https://placehold.co/100?text=?';
+  previewImg.style.display = 'block';
 }
 
+// 添加新成员（包含名言）
 async function addGlobalMember() {
   if (!isConnected) return alert("请保持网络连接");
   const name = document.getElementById("globalName").value.trim();
+  const quote = document.getElementById("globalQuote").value.trim();
   const file = document.getElementById("globalImg").files[0];
-  if (!name || !file) return alert("名字和头像都要填哦");
+  if (!name || !file) return alert("名字和头像必须填写");
+
   if ((window.sharedData.globalMembers || []).some(m => m.name === name)) {
     return alert("这个名字已被占用");
   }
@@ -636,7 +666,7 @@ async function addGlobalMember() {
   const img = await readFileAsDataURL(file);
 
   const globalRef = db.ref(`${DB_ROOT}/globalMembers`);
-  const newGlobals = [...(window.sharedData.globalMembers || []), { id, name, img, quote: "" }];
+  const newGlobals = [...(window.sharedData.globalMembers || []), { id, name, quote, img }];
   await globalRef.set(newGlobals);
 
   for (const f of FACTIONS) {
@@ -651,41 +681,67 @@ async function addGlobalMember() {
 
   alert(`✅ 【${name}】已同步到九大阵营`);
   document.getElementById("globalName").value = "";
+  document.getElementById("globalQuote").value = "";
   document.getElementById("globalImg").value = "";
-  populateMemberSelect();
+  hideModal();
+  setTimeout(() => location.reload(), 500);
 }
 
+// 修改成员
 async function updateMember() {
-  if (!isConnected) return alert("请保持网络连接");
-  const id = document.getElementById("editMemberSelect").value;
-  const newName = document.getElementById("editName").value.trim();
-  const newQuote = document.getElementById("editQuote").value.trim();
+  if (!editingMemberId) return alert("请先选择要修改的成员");
+  const name = document.getElementById("editName").value.trim();
+  const quote = document.getElementById("editQuote").value.trim();
   const file = document.getElementById("editImg").files[0];
-  if (!id || !newName) return alert("请填写完整信息");
 
-  const members = [...(window.sharedData.globalMembers || [])];
-  const idx = members.findIndex(m => m.id === id);
-  if (idx === -1) return alert("成员不存在");
+  if (!name) return alert("姓名不能为空");
 
-  // 检查名字是否冲突（除自己外）
-  if (members.some((m, i) => i !== idx && m.name === newName)) {
-    return alert("这个名字已被占用");
+  const memberIndex = (window.sharedData.globalMembers || []).findIndex(m => m.id === editingMemberId);
+  if (memberIndex === -1) return alert("成员不存在");
+
+  const updatedMembers = [...window.sharedData.globalMembers];
+  updatedMembers[memberIndex] = {
+    ...updatedMembers[memberIndex],
+    name,
+    quote,
+    img: file ? await readFileAsDataURL(file) : updatedMembers[memberIndex].img
+  };
+
+  await db.ref(`${DB_ROOT}/globalMembers`).set(updatedMembers);
+  alert("✅ 成员资料更新成功");
+  hideModal();
+  setTimeout(() => location.reload(), 500);
+}
+
+// 删除成员
+async function confirmDeleteMember() {
+  if (!editingMemberId) return alert("请先选择要删除的成员");
+  if (!confirm(`确定要删除这个成员吗？\n此操作将从所有阵营中移除该成员，且不可恢复！`)) return;
+
+  try {
+    // 从全局成员列表中移除
+    const updatedMembers = (window.sharedData.globalMembers || []).filter(m => m.id !== editingMemberId);
+    await db.ref(`${DB_ROOT}/globalMembers`).set(updatedMembers);
+
+    // 从所有阵营中移除该成员
+    for (const f of FACTIONS) {
+      const factionRef = db.ref(`${DB_ROOT}/${f}`);
+      const fData = window.sharedData[f] || { memberIds: [], votes: {} };
+      if (fData.memberIds && fData.memberIds.includes(editingMemberId)) {
+        fData.memberIds = fData.memberIds.filter(id => id !== editingMemberId);
+        if (fData.votes && fData.votes[editingMemberId]) {
+          delete fData.votes[editingMemberId];
+        }
+        await factionRef.set(fData);
+      }
+    }
+
+    alert("✅ 成员删除成功");
+    hideModal();
+    setTimeout(() => location.reload(), 500);
+  } catch (err) {
+    alert("删除失败：" + err.message);
   }
-
-  let newImg = members[idx].img;
-  if (file) {
-    newImg = await readFileAsDataURL(file);
-  }
-
-  members[idx] = { ...members[idx], name: newName, img: newImg, quote: newQuote };
-
-  const globalRef = db.ref(`${DB_ROOT}/globalMembers`);
-  await globalRef.set(members);
-
-  alert(`✅ 【${newName}】修改成功`);
-  document.getElementById("editForm").style.display = "none";
-  document.getElementById("editMemberSelect").value = "";
-  populateMemberSelect();
 }
 
 // ==================== 重置票数功能 ====================
@@ -733,11 +789,9 @@ function readFileAsDataURL(file) {
 }
 
 window.onclick = e => {
-  if (e.target.classList.contains('modal') || e.target.classList.contains('modal-pwd') || e.target.classList.contains('modal-reset')) {
-    hideModal();
-    hidePwdModal();
-    hideResetModal();
-  }
+  if (e.target.classList.contains('modal')) hideModal();
+  if (e.target.classList.contains('modal-pwd')) hidePwdModal();
+  if (e.target.id === 'modalReset') hideResetModal();
 };
 </script>
 </body>
